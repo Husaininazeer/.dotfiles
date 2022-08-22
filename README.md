@@ -1,11 +1,11 @@
 # .dotfiles
 
 ## Contents include
-- [tmux](https://github.com/tmux/tmux/wiki)
+- [tmux - terminal multiplexer](https://github.com/tmux/tmux/wiki)
 
 
 ## To add
-- [oh-my-zsh](https://github.com/ohmyzsh/ohmyzsh)
-- [vim](https://github.com/vim/vim)
-- [p10k](https://github.com/romkatv/powerlevel10k) 
-- zsh
+- [oh-my-zsh - zsh config manager](https://github.com/ohmyzsh/ohmyzsh)
+- [vim - text editor](https://github.com/vim/vim)
+- [p10k - theme for terminal](https://github.com/romkatv/powerlevel10k) 
+- zsh - bash shell alternative
