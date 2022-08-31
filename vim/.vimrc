@@ -1,51 +1,70 @@
-
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Contents
 " - General
 " - vim-plug plugins
 " - Plugin configs
-" - VIM UI
+" - Vim UI
 """"""""""""""""""""""""""""""""""""""""""""""""""
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""" General 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 
+
 set history=500
 set autoread
 
 " setting tab widths
-set tabstop=4
-set shiftwidth=4
+set tabstop=2
+set shiftwidth=2
 set expandtab
+
+" make searching easier
+set ignorecase
+set smartcase
 
 
 " Leader key mapping
 let mapleader = ","
 nmap <leader>w :w!<cr>
- 
+
+" buffer keybindings (with leader key)
+map <leader>bd :Bclose<cr>:tabclose<cr>gT
+map <leader>ba :bufdo bd<cr>
+map <leader>n :bnext<cr>
+map <leader>p :bprevious<cr>
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""" vim-plug plugins
 """"""""""""""""""""""""""""""""""""""""""""""""""
+
 call plug#begin()
 
-" surrounding things in vim with () and the sort
-Plug 'tpope/vim-surround'
+  " surrounding things in vim with () and the sort
 
-" js/react/gql syntax highlighting and indentation
-Plug 'pangloss/vim-javascript'
-Plug 'peitalin/vim-jsx-typescript'
-Plug 'jparise/vim-graphql'
+  Plug 'tpope/vim-surround'
 
-" atom like one dark theme
-Plug 'sonph/onehalf', { 'rtp': 'vim' }
+  " js/react/gql syntax highlighting and indentation
 
-" NERDTree 
-Plug 'preservim/nerdtree'
+  Plug 'yuezk/vim-js'
+  Plug 'maxmellon/vim-jsx-pretty'
 
+  Plug 'jparise/vim-graphql'
+
+  " atom like one dark theme
+
+  Plug 'sonph/onehalf', { 'rtp': 'vim' }
+
+  " NERDTree 
+
+  Plug 'preservim/nerdtree'
+
+  " Ale (linter)
+  Plug 'dense-analysis/ale'
 
 call plug#end()
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""" Plugin configs
@@ -53,7 +72,8 @@ call plug#end()
 
 
 " NERDTree configs
-let g:NERDTreeWinPos = "right"
+
+let g:NERDTreeWinPos = "left"
 let NERDTreeShowHidden=1 
 let NERDTreeIgnore = ['\.pyc$', '__pycache__', 'node_modules']
 let g:NERDTreeWinSize=35
@@ -61,19 +81,28 @@ map <leader>nn :NERDTreeToggle<cr>
 map <leader>nb :NERDTreeFromBookmark<Space>
 map <leader>nf :NERDTreeFind<cr>
 
+" Ale config
+
+let g:ale_fixers = {
+ \ 'javascript': ['prettier', 'eslint'],
+ \ 'javascriptreact': ['prettier', 'eslint'],
+ \ }
+let g:ale_fix_on_save = 1
+
+
 """"""""""""""""""""""""""""""""""""""""""""""""""
-""""""""""""""""""""""""""""""" VIM UI and theming
+""""""""""""""""""""""""""""""" Vim UI and theming
 """"""""""""""""""""""""""""""""""""""""""""""""""
 
 " Scrolloff - change to 999 to stop cursor moving
-set so=10
+set so=999
 
 " highlight the current line
 set cursorline
 
 " turn on number on the side
 set number
- 
+
 " show current position in status bar 
 set ruler
 
@@ -92,8 +121,8 @@ endif
 
 " use onedark colorscheme
 try
-    colorscheme onehalfdark
-catch
+  colorscheme onehalfdark
+  catch
 endtry
 
 " theming for airline or lightline (uncomment)
