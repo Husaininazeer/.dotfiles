@@ -14,10 +14,11 @@ alias lsa='ls -a'
 alias lsl='ls -al'
 
 # Git
-alias gs='git status'
 alias ga='git add .'
 alias gc='git commit'
 alias gp='git push'
+alias gs='git status'
+alias gss='git stash --include-untracked'
 
 # Mindful-related aliases
 alias mind='cd /var/www/apps/mindful/'
@@ -27,7 +28,8 @@ alias freshnpminstall='rm -rf dist/ node_modules/ && npm i && git reset --hard'
 
 # Personal aliases
 alias dot='cd ~/.dotfiles'
-alias dend='cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/dendron/vault && $EDITOR .'
+alias icloud='cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/'
+# alias dend='cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/dendron/vault && $EDITOR .'
 alias vimrc='$EDITOR ~/.vimrc'
 alias tmuxc='$EDITOR ~/.tmux.conf'
 alias aliases='$EDITOR ~/.oh-my-zsh/custom/alias.zsh'

@@ -10,3 +10,5 @@
 * [p10k - theme for terminal](https://github.com/romkatv/powerlevel10k) 
 
 ## To add
+
+* bashrc (mostly for [ayn](https://github.com/husaininazeer/ayn))
