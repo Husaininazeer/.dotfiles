@@ -4,6 +4,7 @@
 " - vim-plug plugins
 " - Plugin configs
 " - Vim UI
+" - Helper functions
 """"""""""""""""""""""""""""""""""""""""""""""""""
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
@@ -35,6 +36,12 @@ map <leader>n :bnext<cr>
 map <leader>p :bprevious<cr>
 
 
+" smart way to move between windows
+map <C-j> <C-W>j
+map <C-k> <C-W>k
+map <C-h> <C-W>h
+map <C-l> <C-W>l
+
 """"""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""" vim-plug plugins
 """"""""""""""""""""""""""""""""""""""""""""""""""
@@ -52,7 +59,7 @@ call plug#begin()
 
   Plug 'jparise/vim-graphql'
 
-  " atom like one dark theme
+  " Atom like one dark theme
 
   Plug 'sonph/onehalf', { 'rtp': 'vim' }
 
@@ -125,9 +132,27 @@ try
   catch
 endtry
 
+" status line
+set laststatus=2
+
+" format the status line
+set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l\ \ Column:\ %c
+
 " theming for airline or lightline (uncomment)
 " let g:airline_theme='onehalfdark'
 " lightline
 " let g:lightline = { 'colorscheme': 'onehalfdark' }
 
+""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""" Helper functions
+""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" returns true if paste mode is enabled
+
+function! HasPaste()
+    if &paste
+        return 'PASTE MODE  '
+    endif
+    return ''
+endfunction
 
