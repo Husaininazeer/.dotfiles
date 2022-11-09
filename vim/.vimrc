@@ -59,9 +59,8 @@ call plug#begin()
 
   Plug 'jparise/vim-graphql'
 
-  " Atom like one dark theme
-
-  Plug 'sonph/onehalf', { 'rtp': 'vim' }
+  " Plug 'sonph/onehalf', { 'rtp': 'vim' }
+  Plug 'sainnhe/sonokai'
 
   " NERDTree 
 
@@ -69,6 +68,12 @@ call plug#begin()
 
   " Ale (linter)
   Plug 'dense-analysis/ale'
+
+  " alignment for md
+  Plug 'junegunn/vim-easy-align'
+
+  " fugitive - git wrapper for vim
+  Plug 'tpope/vim-fugitive'
 
 call plug#end()
 
@@ -83,18 +88,33 @@ call plug#end()
 let g:NERDTreeWinPos = "left"
 let NERDTreeShowHidden=1 
 let NERDTreeIgnore = ['\.pyc$', '__pycache__', 'node_modules']
-let g:NERDTreeWinSize=35
+let g:NERDTreeWinSize=40
+
 map <leader>nn :NERDTreeToggle<cr>
-map <leader>nb :NERDTreeFromBookmark<Space>
-map <leader>nf :NERDTreeFind<cr>
 
 " Ale config
 
+let g:ale_fix_on_save = 1
+let g:ale_lint_on_save = 1
+let g:ale_sign_error = '●'
+let g:ale_sign_warning = '.'
+
 let g:ale_fixers = {
  \ 'javascript': ['prettier', 'eslint'],
+ \ 'typescript': ['prettier', 'eslint'],
  \ 'javascriptreact': ['prettier', 'eslint'],
+ \ 'typescriptreact': ['prettier', 'eslint'],
+ \ 'bash': ['prettier', 'eslint'],
  \ }
-let g:ale_fix_on_save = 1
+
+let g:ale_linters = {
+\   'markdown':      ['mdl'],
+\}
+
+" vim-easy-align config
+
+xmap ga <Plug>(EasyAlign)
+nmap ga <Plug>(EasyAlign)
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
@@ -108,7 +128,11 @@ set so=999
 set cursorline
 
 " turn on number on the side
-set number
+set nonumber
+
+" set the command line height to lower
+set cmdheight=1
+
 
 " show current position in status bar 
 set ruler
@@ -128,7 +152,7 @@ endif
 
 " use onedark colorscheme
 try
-  colorscheme onehalfdark
+  colorscheme sonokai
   catch
 endtry
 
