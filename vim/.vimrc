@@ -42,6 +42,12 @@ map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
 
+" adding python3 support
+let g:pymode_python = 'python3'
+
+" allow backspace to go before the start of insert mode
+set backspace=indent,eol,start
+
 """"""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""" vim-plug plugins
 """"""""""""""""""""""""""""""""""""""""""""""""""
@@ -56,11 +62,13 @@ call plug#begin()
 
   Plug 'yuezk/vim-js'
   Plug 'maxmellon/vim-jsx-pretty'
-
   Plug 'jparise/vim-graphql'
 
-  " Plug 'sonph/onehalf', { 'rtp': 'vim' }
-  Plug 'sainnhe/sonokai'
+  " themes
+  
+  Plug 'sonph/onehalf', { 'rtp': 'vim' }
+  Plug 'lucasprag/simpleblack'
+  "Plug 'sainnhe/sonokai'
 
   " NERDTree 
 
@@ -75,6 +83,17 @@ call plug#begin()
   " fugitive - git wrapper for vim
   Plug 'tpope/vim-fugitive'
 
+  " snippets
+  Plug 'SirVer/ultisnips'
+  Plug 'mlaursen/vim-react-snippets'
+
+  " airline
+  Plug 'vim-airline/vim-airline'
+  Plug 'vim-airline/vim-airline-themes'
+
+  " fuzzy search
+  Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+
 call plug#end()
 
 
@@ -88,9 +107,9 @@ call plug#end()
 let g:NERDTreeWinPos = "left"
 let NERDTreeShowHidden=1 
 let NERDTreeIgnore = ['\.pyc$', '__pycache__', 'node_modules']
-let g:NERDTreeWinSize=40
+let g:NERDTreeWinSize=50
 
-map <leader>nn :NERDTreeToggle<cr>
+map <leader><leader>n :NERDTreeToggle<cr>
 
 " Ale config
 
@@ -116,6 +135,14 @@ let g:ale_linters = {
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
+" snippets config
+" Trigger configuration. You need to change this 
+" to something other than <tab> if you use one of the following:
+" - https://github.com/Valloric/YouCompleteMe
+" - https://github.com/nvim-lua/completion-nvim
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-n>"
+let g:UltiSnipsJumpBackwardTrigger="<c-p>"
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""" Vim UI and theming
@@ -128,7 +155,7 @@ set so=999
 set cursorline
 
 " turn on number on the side
-set nonumber
+set number
 
 " set the command line height to lower
 set cmdheight=1
@@ -149,12 +176,22 @@ if exists('+termguicolors')
   let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
   set termguicolors
 endif
+ 
+" if has('termguicolors')
+  " set termguicolors
+" endif
 
-" use onedark colorscheme
+" The configuration options should be placed before `colorscheme sonokai`.
+let g:sonokai_style = 'andromeda'
+let g:sonokai_better_performance = 1
+
 try
-  colorscheme sonokai
+  " colorscheme simpleblack
+  colorscheme onehalfdark
+  " colorscheme sonokai
   catch
-endtry
+endtry 
+
 
 " status line
 set laststatus=2
@@ -163,7 +200,10 @@ set laststatus=2
 set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l\ \ Column:\ %c
 
 " theming for airline or lightline (uncomment)
-" let g:airline_theme='onehalfdark'
+let g:airline_theme='onehalfdark'
+let g:airline#extensions#tabline#enabled = 1 " Enable the list of buffers
+
+" let g:airline_statusline_ontop = 1
 " lightline
 " let g:lightline = { 'colorscheme': 'onehalfdark' }
 
