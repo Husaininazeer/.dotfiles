@@ -94,6 +94,10 @@ call plug#begin()
   " fuzzy search
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 
+  " pandoc
+  Plug 'vim-pandoc/vim-pandoc'
+  Plug 'vim-pandoc/vim-pandoc-syntax'  
+
 call plug#end()
 
 
